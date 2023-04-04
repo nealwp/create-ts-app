@@ -1,0 +1,15 @@
+{
+  "name": "@nealwp/create-ts-app",
+  "version": "1.0.0",
+  "description": "Create an empty TS app",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "cli",
+    "typescript"
+  ],
+  "author": "nealwp",
+  "license": "ISC"
+}
