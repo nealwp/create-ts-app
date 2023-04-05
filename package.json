@@ -2,11 +2,12 @@
   "name": "@nealwp/create-ts-app",
   "version": "1.0.0",
   "description": "Create an empty TS app",
-  "main": "index.js",
+  "exports": "./index.js",
   "bin": {
     "@nealwp/create-ts-app": "./index.js"
   },
   "scripts": {
+    "dev": "npm run build && node ./dist/index.js",
     "test": "jest",
     "build": "rimraf ./dist && npx tsc && copyfiles templates/**/* package.json README.md LICENSE dist/"
   },
@@ -18,11 +19,16 @@
     "cli",
     "typescript"
   ],
+  "type": "module",
   "author": "nealwp",
   "license": "ISC",
   "devDependencies": {
+    "@types/inquirer": "^9.0.3",
     "copyfiles": "^2.4.1",
+    "inquirer": "^9.1.5",
+    "nodemon": "^2.0.22",
     "rimraf": "^4.4.1",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.3"
   }
 }
