@@ -112,5 +112,9 @@
   "exclude": [
     "src/**/*.spec.ts",
     "src/**/*.test.ts"
-  ]
+  ],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
 }
