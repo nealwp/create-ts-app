@@ -2,8 +2,12 @@
 import inquirer from 'inquirer'
 import * as fs from 'node:fs'
 import * as path from 'node:path'
+import { fileURLToPath } from 'url';
 
-const CHOICES = fs.readdirSync(`./templates`);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const CHOICES = fs.readdirSync(path.join(__dirname, 'templates'));
 const CURR_DIR = process.cwd()
 
 const QUESTIONS = [
@@ -63,7 +67,7 @@ prompt(QUESTIONS).then(answers => {
   const projectChoice = answers['project-choice'];
   const projectName = answers['project-name'];
 
-  const templatePath = path.join(CURR_DIR, 'templates', projectChoice);
+  const templatePath = path.join(__dirname, 'templates', projectChoice);
   const tartgetPath = path.join(CURR_DIR, projectName);
   const options = {
     projectName,
