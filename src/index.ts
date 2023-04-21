@@ -41,7 +41,7 @@ function createProject(projectPath: string) {
   return true;
 }
 
-const SKIP_FILES = ['node_modules', '.template.json'];
+const SKIP_FILES = ['node_modules', '.template.json', 'package-lock.json'];
 
 function createDirectoryContents(templatePath: string, projectName: string) {
   const filesToCreate = fs.readdirSync(templatePath);
