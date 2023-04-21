@@ -1,8 +1,7 @@
 {
-    "name": "typescript-cli",
+    "name": "typescript-library",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
     "scripts": {
         "dev": "nodemon ./src/index.ts",
         "test": "jest",
