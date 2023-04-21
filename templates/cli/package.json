@@ -2,7 +2,9 @@
     "name": "typescript-cli",
     "version": "1.0.0",
     "description": "",
-    "main": "index.js",
+    "bin": {
+        "cli": "./index.js"
+    },
     "scripts": {
         "dev": "nodemon ./src/index.ts",
         "test": "jest",
