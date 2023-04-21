@@ -10,7 +10,7 @@ export const main = () => {
             if (helloArgs[0]) {
                 console.log(`Hello ${helloArgs[0]}`)
             } else {
-                console.log(`Hello world!}`)
+                console.log(`Hello world!`)
             }
             break
         case "help":
