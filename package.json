@@ -1,6 +1,6 @@
 {
   "name": "@nealwp/create-ts-app",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Create an empty TS app",
   "exports": "./index.js",
   "bin": {
