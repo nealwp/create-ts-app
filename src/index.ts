@@ -28,8 +28,6 @@ const QUESTIONS = [
     },
 ];
 
-const prompt = inquirer.createPromptModule();
-
 function createProject(projectPath: string) {
     if (fs.existsSync(projectPath)) {
         console.log(`Folder ${projectPath} exists. Delete or use another name.`);
@@ -63,6 +61,21 @@ function createDirectoryContents(templatePath: string, projectName: string) {
     });
 }
 
+function renameDotfiles(projectName: string) {
+    
+    const dotfiles = ['gitignore', 'prettierrc.json', 'eslintrc.json', 'prettierignore'];
+
+    for (const file in dotfiles) {
+        const oldPath = path.join(CURR_DIR, projectName, file);
+        if (fs.existsSync(oldPath)) {
+            const newPath = path.join(CURR_DIR, projectName, `.${file}`);
+            fs.renameSync(oldPath, newPath) 
+        }
+    }
+}
+
+const prompt = inquirer.createPromptModule();
+
 prompt(QUESTIONS).then((answers) => {
     const projectChoice = answers['project-choice'];
     const projectName = answers['project-name'];
@@ -83,4 +96,5 @@ prompt(QUESTIONS).then((answers) => {
     }
 
     createDirectoryContents(templatePath, projectName);
+    renameDotfiles(projectName);
 });
