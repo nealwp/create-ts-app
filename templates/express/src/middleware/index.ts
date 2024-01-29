@@ -1,9 +1,7 @@
-import { corsMiddleware } from './cors.middleware'
-import bodyParserMiddleware from './bodyparser.middleware'
+import cors from 'cors';
+import helmet from 'helmet';
+import compression from 'compression';
 
-const middleware = [
-    corsMiddleware,
-    bodyParserMiddleware
-]
+const middleware = [helmet(), cors(), compression()];
 
 export { middleware }
