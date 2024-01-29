@@ -82,14 +82,6 @@ prompt(QUESTIONS).then((answers) => {
 
     const templatePath = path.join(__dirname, 'templates', projectChoice);
     const tartgetPath = path.join(CURR_DIR, projectName);
-    const options = {
-        projectName,
-        templateName: projectChoice,
-        templatePath,
-        tartgetPath,
-    };
-    console.log(options);
-    console.log(answers);
 
     if (!createProject(tartgetPath)) {
         return;
