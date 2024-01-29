@@ -14,4 +14,4 @@ server.use('/api/example', router);
 server.listen(PORT, () => {
     const timestamp = new Date().toISOString();
     console.log(`[${timestamp}]: server started`);
-})
+});

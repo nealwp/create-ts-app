@@ -10,6 +10,6 @@ npx @nealwp/create-ts-app@latest
 
 ## Templates
 
-- CLI
-- Library/NPM Package
-- Express app
+-   CLI
+-   Library/NPM Package
+-   Express app

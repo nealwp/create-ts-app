@@ -4,4 +4,4 @@ import compression from 'compression';
 
 const middleware = [helmet(), cors(), compression()];
 
-export { middleware }
+export { middleware };

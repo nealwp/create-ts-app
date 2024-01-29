@@ -13,4 +13,3 @@ describe('GET /health', () => {
         await request.get(`/health`).expect(200);
     });
 });
-
