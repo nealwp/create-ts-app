@@ -65,7 +65,7 @@ function renameDotfiles(projectName: string) {
     
     const dotfiles = ['gitignore', 'prettierrc.json', 'eslintrc.json', 'prettierignore'];
 
-    for (const file in dotfiles) {
+    for (const file of dotfiles) {
         const oldPath = path.join(CURR_DIR, projectName, file);
         if (fs.existsSync(oldPath)) {
             const newPath = path.join(CURR_DIR, projectName, `.${file}`);
