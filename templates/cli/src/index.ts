@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-export const main = () => {
+export function main() {
     const args = process.argv.slice(2);
     const command = args[0];
 
@@ -15,14 +15,14 @@ export const main = () => {
             break;
         case 'help':
             showHelp();
+            break;
         default:
             console.log(`Unknown command: ${command}`);
     }
 };
 
-main();
 
-const showHelp = () => {
+function showHelp() {
     console.log(`
     Available commands:
     
@@ -31,3 +31,5 @@ const showHelp = () => {
 
     `);
 };
+
+main();
