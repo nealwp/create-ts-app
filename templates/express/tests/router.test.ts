@@ -9,7 +9,7 @@ server.use("/", router);
 const request = supertest(server);
 
 describe("GET /health", () => {
-  it("should return 200 status", async () => {
-    await request.get(`/health`).expect(200);
-  });
+    it("should return 200 status", async () => {
+        await request.get(`/health`).expect(200);
+    });
 });

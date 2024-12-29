@@ -12,6 +12,6 @@ server.use(middleware);
 server.use("/api/example", router);
 
 server.listen(PORT, () => {
-  const timestamp = new Date().toISOString();
-  console.log(`[${timestamp}]: server started`);
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}]: server started`);
 });
