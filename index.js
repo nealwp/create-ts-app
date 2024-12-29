@@ -1,48 +1,9 @@
 #!/usr/bin/env node
 import readline from "node:readline/promises";
-//import inquirer from 'inquirer';
-//import { DistinctQuestion } from 'inquirer';
-import * as fs from "node:fs";
-import * as path from "node:path";
+import fs from "node:fs";
+import path from "node:path";
 import { fileURLToPath } from "url";
 
-console.log(process.env["NODE_ENV"]);
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const templates = fs.readdirSync(path.join(__dirname, "templates"));
-
-//const CURR_DIR = process.cwd();
-
-//const QUESTIONS: DistinctQuestion[] = [
-//    {
-//        name: 'project-choice',
-//        type: 'list',
-//        message: 'What project template would you like to generate?',
-//        choices: CHOICES,
-//    },
-//    {
-//        name: 'project-name',
-//        type: 'input',
-//        message: 'Project name:',
-//        validate: function(input: string) {
-//            if (/^([A-Za-z\-_\d])+$/.test(input)) return true;
-//            else return 'Project name may only include letters, numbers, underscores and hashes.';
-//        },
-//    },
-//];
-//
-//function createProject(projectPath: string) {
-//    if (fs.existsSync(projectPath)) {
-//        console.log(`Folder ${projectPath} exists. Delete or use another name.`);
-//        return false;
-//    }
-//
-//    fs.mkdirSync(projectPath);
-//
-//    return true;
-//}
-//
 //const SKIP_FILES = ['node_modules', '.template.json', 'package-lock.json'];
 //
 //function createDirectoryContents(templatePath: string, projectName: string) {
@@ -78,20 +39,59 @@ const templates = fs.readdirSync(path.join(__dirname, "templates"));
 //    }
 //}
 
-//const prompt = inquirer.createPromptModule();
+/**
+ * @param {string} name
+ */
+function validProjectName(name) {
+  const regex = new RegExp("^([A-Za-z\\-_\\d])+$");
+  return regex.test(name);
+}
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-const projectName = await rl.question("enter a project name: ");
-console.log(projectName);
-const selectedTemplate = await rl.question(
-  `enter a template: [${templates.join(",")}] `,
-);
-console.log(selectedTemplate);
-process.exit(0);
+async function main() {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+  const projectName = await rl.question("enter a project name: ");
 
+  if (!validProjectName(projectName)) {
+    console.error(
+      "ERROR: invalid project name. can only contain letters, numbers, underscores and dashes.",
+    );
+    process.exit(1);
+  }
+
+  const cwd = process.cwd();
+  const targetPath = path.join(cwd, projectName);
+
+  if (fs.existsSync(targetPath)) {
+    console.error(`ERROR: ${targetPath} already exists.`);
+    process.exit(1);
+  }
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  const templates = fs.readdirSync(path.join(__dirname, "templates"));
+  const selectedTemplate = await rl.question(
+    `enter a template: [${templates.join(",")}] `,
+  );
+
+  if (!templates.includes(selectedTemplate)) {
+    console.error(
+      `ERROR: invalid template. must be one of ${templates.join(",")}`,
+    );
+    process.exit(1);
+  }
+
+  const templatePath = path.join(__dirname, "templates", selectedTemplate);
+
+  fs.mkdirSync(targetPath);
+
+  process.exit(0);
+}
+
+main();
 //prompt(QUESTIONS).then((answers) => {
 //    const projectChoice = answers['project-choice'];
 //    const projectName = answers['project-name'];
@@ -99,9 +99,6 @@ process.exit(0);
 //    const templatePath = path.join(__dirname, 'templates', projectChoice);
 //    const tartgetPath = path.join(CURR_DIR, projectName);
 //
-//    if (!createProject(tartgetPath)) {
-//        return;
-//    }
 //
 //    createDirectoryContents(templatePath, projectName);
 //    renameDotfiles(projectName);

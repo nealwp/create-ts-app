@@ -3,12 +3,12 @@
  * @param name
  */
 const printMessage = (name?: string): void => {
-    if (name) {
-        console.log(`Hello ${name}!`);
-        return;
-    }
+  if (name) {
+    console.log(`Hello ${name}!`);
+    return;
+  }
 
-    console.log(`Hello world!`);
+  console.log(`Hello world!`);
 };
 
 const tempModule = { printMessage };
