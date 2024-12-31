@@ -4,8 +4,8 @@ on:
   push:
 
 jobs:
-  lint:
-    name: Lint Code
+  ci:
+    name: Run Continuous Integration Checks
     runs-on: ubuntu-latest
 
     steps:
