@@ -1,0 +1,9 @@
+.github
+.gitattributes
+.prettierignore
+.prettierrc.json
+eslint.config.js
+tsconfig.json
+tests
+# keep the template tests
+!templates/*/tests/
