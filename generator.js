@@ -56,7 +56,7 @@ function validateProjectName(name) {
         throw new Error(
             "invalid project name. can only contain letters, numbers, underscores and dashes.",
         );
-    };
+    }
     return;
 }
 
@@ -91,7 +91,6 @@ function dirname() {
  * @param {Rl} rl
  */
 async function getTemplateSelection(fs, rl) {
-
     const templates = getTemplateList(fs);
 
     const selectedTemplate = await rl.question(
@@ -105,7 +104,6 @@ async function getTemplateSelection(fs, rl) {
     }
     return path.join(dirname(), "templates", selectedTemplate);
 }
-
 
 /**
  * @param {Fs} fs
@@ -130,7 +128,7 @@ function copyTemplateFiles(fs, templatePath, projectName) {
 
         if (filesToSkip.includes(item)) {
             continue;
-        };
+        }
 
         const stats = fs.statSync(src);
         const dest = path.join(cwd, projectName, item);
