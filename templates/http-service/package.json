@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "nodemon src/app.ts",
     "test": "node --import tsx --test ./tests/*",
-    "lint": "npx prettier --check .",
+    "lint": "npx eslint",
     "start": "node dist/app.js",
     "format": "npx prettier --write .",
+    "prettier": "npx prettier --check .",
     "check": "tsc --noEmit",
     "build": "rm -rf dist && tsc"
   },
