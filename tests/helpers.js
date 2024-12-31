@@ -69,10 +69,10 @@ export function getFsStub(retVal, retVal2 = []) {
         mkdirSync: function(dir) {
             this.createdDirs.push(dir);
         },
-        statSync: (path) => {
+        statSync: function(path) {
             return {
-                isFile: () => true,
-                isDirectory: () => false,
+                isFile: () => !path.endsWith('/'),
+                isDirectory: () => path.endsWith('/'),
             };
         },
         copyFileSync: function(src, dest) {

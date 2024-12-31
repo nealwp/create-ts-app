@@ -11,7 +11,7 @@
     "test": "node --test tests/*",
     "lint": "eslint",
     "format": "npx prettier --write .",
-    "format:check": "npx prettier --check ."
+    "prettier": "npx prettier --check ."
   },
   "repository": {
     "type": "git",
