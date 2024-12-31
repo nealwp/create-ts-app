@@ -1,1 +1,1 @@
-export { tempModule } from './temp.module';
+export { tempModule } from "./temp.module";

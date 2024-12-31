@@ -1,26 +1,24 @@
 {
   "name": "@nealwp/create-ts-app",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Create an empty TS app",
   "exports": "./index.js",
   "bin": {
     "@nealwp/create-ts-app": "./index.js"
   },
   "scripts": {
-    "start": "ts-node ./src/index.ts",
-    "dev": "npm run build && node ./dist/index.js",
-    "build": "rimraf ./dist && npx tsc && copyfiles \"templates/**/*\" package.json README.md LICENSE dist/",
-    "lint": "npx prettier --check .",
+    "start": "node ./index.js",
+    "test": "node --test --test-reporter=spec tests/*",
+    "lint": "eslint",
     "format": "npx prettier --write .",
-    "check": "tsc --noEmit"
+    "prettier": "npx prettier --check ."
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/nealwp/create-ts-app.git"
   },
   "keywords": [
-    "cli",
-    "typescript"
+    "cli"
   ],
   "type": "module",
   "author": "nealwp",
@@ -29,15 +27,12 @@
     "node": ">=14.16"
   },
   "devDependencies": {
-    "@types/inquirer": "^9.0.3",
-    "copyfiles": "^2.4.1",
-    "eslint": "^8.56.0",
-    "prettier": "^3.2.4",
-    "rimraf": "^4.4.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.3"
-  },
-  "dependencies": {
-    "inquirer": "^9.1.5"
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.2",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
   }
 }
