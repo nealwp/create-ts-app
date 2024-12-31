@@ -14,7 +14,7 @@ const fakeTemplateFiles = [
 export function getReadlineStub(retVals) {
     return {
         callCount: 0,
-        question: async function() {
+        question: async function () {
             const result = retVals[this.callCount];
             this.callCount += 1;
             return result;
@@ -26,7 +26,7 @@ export function getReadlineStub(retVals) {
  * @typedef {Object} StatObj
  * @property {() => boolean} isFile
  * @property {() => boolean} isDirectory
-*/
+ */
 
 /**
  * @typedef {Object} ReaddirOpts
@@ -36,7 +36,7 @@ export function getReadlineStub(retVals) {
 
 /**
  * @typedef {(path: string, opts: ReaddirOpts) => string[]} ReaddirFunc
-*/
+ */
 
 /**
  * @typedef {Object} FsStub
@@ -59,23 +59,23 @@ export function getFsStub(retVal, retVal2 = []) {
         createdFiles: [],
         createdDirs: [],
         existsSync: () => retVal,
-        readdirSync: function(path, opts) {
+        readdirSync: function (path, opts) {
             if (opts.recursive) {
                 return fakeTemplateFiles;
             } else {
                 return retVal2;
             }
         },
-        mkdirSync: function(dir) {
+        mkdirSync: function (dir) {
             this.createdDirs.push(dir);
         },
-        statSync: function(path) {
+        statSync: function (path) {
             return {
-                isFile: () => !path.endsWith('/'),
-                isDirectory: () => path.endsWith('/'),
+                isFile: () => !path.endsWith("/"),
+                isDirectory: () => path.endsWith("/"),
             };
         },
-        copyFileSync: function(src, dest) {
+        copyFileSync: function (src, dest) {
             this.createdFiles.push(dest);
         },
     };

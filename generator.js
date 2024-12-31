@@ -79,7 +79,10 @@ function getTargetPath(fs, name) {
  * @param {Fs} fs
  */
 function getTemplateList(fs) {
-    return fs.readdirSync(path.join(dirname(), "templates"), { recursive: false, encoding: 'utf8' });
+    return fs.readdirSync(path.join(dirname(), "templates"), {
+        recursive: false,
+        encoding: "utf8",
+    });
 }
 
 function dirname() {
@@ -123,7 +126,10 @@ const filesToSkip = ["node_modules", ".template.json", "package-lock.json"];
  */
 function copyTemplateFiles(fs, templatePath, projectName) {
     const cwd = process.cwd();
-    const templateItems = fs.readdirSync(templatePath, { recursive: true, encoding: 'utf8' });
+    const templateItems = fs.readdirSync(templatePath, {
+        recursive: true,
+        encoding: "utf8",
+    });
     for (const item of templateItems) {
         const src = path.join(templatePath, item);
 
