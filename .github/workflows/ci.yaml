@@ -46,7 +46,7 @@ jobs:
       run: |
         VERSION=$(node -p "require('./package.json').version")
         echo "Current version is: $VERSION"
-        echo "::set-output name=version::$VERSION"
+        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
     - name: Get list of existing Git tags
       run: |
