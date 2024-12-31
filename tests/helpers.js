@@ -14,7 +14,7 @@ const fakeTemplateFiles = [
 export function getReadlineStub(retVals) {
     return {
         callCount: 0,
-        question: async function () {
+        question: async function() {
             const result = retVals[this.callCount];
             this.callCount += 1;
             return result;
@@ -23,42 +23,59 @@ export function getReadlineStub(retVals) {
 }
 
 /**
+ * @typedef {Object} StatObj
+ * @property {() => boolean} isFile
+ * @property {() => boolean} isDirectory
+*/
+
+/**
+ * @typedef {Object} ReaddirOpts
+ * @property {boolean} recursive
+ * @property {'utf8'} encoding
+ */
+
+/**
+ * @typedef {(path: string, opts: ReaddirOpts) => string[]} ReaddirFunc
+*/
+
+/**
+ * @typedef {Object} FsStub
+ * @property {string[]} createdFiles
+ * @property {string[]} createdDirs
+ * @property {function(string): boolean} existsSync
+ * @property {ReaddirFunc} readdirSync
+ * @property {function(string): void} mkdirSync
+ * @property {function(string): StatObj } statSync
+ * @property {function(string, string): void} copyFileSync
+ */
+
+/**
  * @param {boolean} retVal
  * @param {string[]} retVal2
+ * @returns {FsStub}
  */
 export function getFsStub(retVal, retVal2 = []) {
     return {
         createdFiles: [],
         createdDirs: [],
         existsSync: () => retVal,
-        /**
-         * @param {string} path
-         * @param {Object?} opts
-         */
-        readdirSync: function (path, opts) {
-            if (opts && opts.recursive) {
+        readdirSync: function(path, opts) {
+            if (opts.recursive) {
                 return fakeTemplateFiles;
             } else {
                 return retVal2;
             }
         },
-        /**
-         * @param {string} dir
-         */
-        mkdirSync: function (dir) {
+        mkdirSync: function(dir) {
             this.createdDirs.push(dir);
         },
-        statSync: () => {
+        statSync: (path) => {
             return {
                 isFile: () => true,
                 isDirectory: () => false,
             };
         },
-        /**
-         * @param {string} src
-         * @param {string} dest
-         */
-        copyFileSync: function (src, dest) {
+        copyFileSync: function(src, dest) {
             this.createdFiles.push(dest);
         },
     };

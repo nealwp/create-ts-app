@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import * as readline from "node:readline/promises";
-import * as fs from "node:fs";
+import readline from "node:readline/promises";
+import fs from "node:fs";
 import * as generator from "./generator.js";
 
 async function main() {

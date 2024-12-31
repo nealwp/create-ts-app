@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
     "checkJs": true,
+    "allowJs": true,
     "noEmit": true,
     "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "target": "ES6"
   },
   "include": ["./**/*.js"]
 }

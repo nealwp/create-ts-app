@@ -3,19 +3,20 @@ import { fileURLToPath } from "url";
 
 /**
  * @typedef {Object} ReadDirOpts
- * @param {boolean} recursive
+ * @property {boolean} recursive
+ * @property {'utf8'} encoding
  */
 
 /**
  * @typedef {Object} StatObj
- * @param {function(): boolean} isDirectory
- * @param {function(): boolean} isFile
+ * @property {function(): boolean} isDirectory
+ * @property {function(): boolean} isFile
  */
 
 /**
  * @typedef {Object} Fs
  * @property {function(string): boolean} existsSync
- * @property {function(string, ReadDirOpts?): string[]} readdirSync
+ * @property {function(string, ReadDirOpts): string[]} readdirSync
  * @property {function(string): void} mkdirSync
  * @property {function(string): StatObj} statSync
  * @property {function(string, string): void} copyFileSync
@@ -78,7 +79,7 @@ function getTargetPath(fs, name) {
  * @param {Fs} fs
  */
 function getTemplateList(fs) {
-    return fs.readdirSync(path.join(dirname(), "templates"));
+    return fs.readdirSync(path.join(dirname(), "templates"), { recursive: false, encoding: 'utf8' });
 }
 
 function dirname() {
@@ -122,7 +123,7 @@ const filesToSkip = ["node_modules", ".template.json", "package-lock.json"];
  */
 function copyTemplateFiles(fs, templatePath, projectName) {
     const cwd = process.cwd();
-    const templateItems = fs.readdirSync(templatePath, { recursive: true });
+    const templateItems = fs.readdirSync(templatePath, { recursive: true, encoding: 'utf8' });
     for (const item of templateItems) {
         const src = path.join(templatePath, item);
 
