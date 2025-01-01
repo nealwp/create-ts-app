@@ -16,4 +16,4 @@ function deleteExample(id: number) {
     return id;
 }
 
-export default { getExamples, saveExample, deleteExample }
+export default { getExamples, saveExample, deleteExample };

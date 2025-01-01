@@ -9,7 +9,7 @@ router.get("/health", (_, res) => {
 
 router.get("/", (_, res) => {
     try {
-        const examples = service.getExamples()
+        const examples = service.getExamples();
         return res.status(200).json(examples);
     } catch (error) {
         console.error(error);
@@ -19,7 +19,7 @@ router.get("/", (_, res) => {
 
 router.post("/", (req, res) => {
     try {
-        const saved = service.saveExample(req.body)
+        const saved = service.saveExample(req.body);
         return res.status(200).json(saved);
     } catch (error) {
         console.error(error);
@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
 router.delete("/:id", (req, res) => {
     const { id } = req.params;
     try {
-        const deleted = service.deleteExample(+id)
+        const deleted = service.deleteExample(+id);
         return res.status(200).json(deleted);
     } catch (error) {
         console.error(error);
