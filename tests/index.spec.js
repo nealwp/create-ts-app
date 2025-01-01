@@ -74,6 +74,16 @@ describe("project generator", async () => {
         assert.ok(!fsStub.createdFiles.includes("package-lock.json"));
     });
 
+    it("should set the package name in package.json", async () => {
+        const fsStub = helpers.getFsStub(false, ["valid-template"]);
+        const rlStub = helpers.getReadlineStub([validName, "valid-template"]);
+        await generateProject(rlStub, fsStub);
+        assert.strictEqual(
+            fsStub.pkgJsonContent,
+            `{\n  "name": "${validName}"\n}`,
+        );
+    });
+
     it("return the project name when completes successful", async () => {
         const fsStub = helpers.getFsStub(false, ["valid-template"]);
         const rlStub = helpers.getReadlineStub([validName, "valid-template"]);

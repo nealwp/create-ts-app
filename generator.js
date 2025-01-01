@@ -20,6 +20,8 @@ import { fileURLToPath } from "url";
  * @property {function(string): void} mkdirSync
  * @property {function(string): StatObj} statSync
  * @property {function(string, string): void} copyFileSync
+ * @property {function(string, 'utf8'): string} readFileSync
+ * @property {function(string, string, 'utf8'): void} writeFileSync
  */
 
 /**
@@ -38,6 +40,7 @@ export async function generateProject(rl, fs) {
     const templatePath = await getTemplateSelection(fs, rl);
     createProjectDir(fs, targetPath);
     copyTemplateFiles(fs, templatePath, projectName);
+    setPackageName(fs, templatePath, projectName);
     return projectName;
 }
 
@@ -147,4 +150,21 @@ function copyTemplateFiles(fs, templatePath, projectName) {
             fs.copyFileSync(src, dest);
         }
     }
+}
+
+/**
+ * @param {Fs} fs
+ * @param {string} templatePath
+ * @param {string} name
+ */
+function setPackageName(fs, templatePath, name) {
+    const packageJsonPath = path.join(templatePath, "package.json");
+    const data = fs.readFileSync(packageJsonPath, "utf8");
+    const packageJson = JSON.parse(data);
+    packageJson.name = name;
+    fs.writeFileSync(
+        packageJsonPath,
+        JSON.stringify(packageJson, null, 2),
+        "utf8",
+    );
 }

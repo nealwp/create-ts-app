@@ -11,7 +11,9 @@
     "test": "node --test --test-reporter=spec tests/*",
     "lint": "eslint",
     "format": "npx prettier --write .",
-    "prettier": "npx prettier --check ."
+    "prettier": "npx prettier --check .",
+    "typecheck": "tsc --noEmit"
+
   },
   "repository": {
     "type": "git",
