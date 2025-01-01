@@ -14,7 +14,7 @@ const fakeTemplateFiles = [
 export function getReadlineStub(retVals) {
     return {
         callCount: 0,
-        question: async function () {
+        question: async function() {
             const result = retVals[this.callCount];
             this.callCount += 1;
             return result;
@@ -63,29 +63,29 @@ export function getFsStub(retVal, retVal2 = []) {
         createdDirs: [],
         pkgJsonContent: "{}",
         existsSync: () => retVal,
-        readdirSync: function (path, opts) {
+        readdirSync: function(path, opts) {
             if (opts.recursive) {
                 return fakeTemplateFiles;
             } else {
                 return retVal2;
             }
         },
-        mkdirSync: function (dir) {
+        mkdirSync: function(dir) {
             this.createdDirs.push(dir);
         },
-        statSync: function (path) {
+        statSync: function(path) {
             return {
                 isFile: () => !path.endsWith("/"),
                 isDirectory: () => path.endsWith("/"),
             };
         },
-        copyFileSync: function (src, dest) {
+        copyFileSync: function(src, dest) {
             this.createdFiles.push(dest);
         },
-        readFileSync: function (src) {
+        readFileSync: function() {
             return this.pkgJsonContent;
         },
-        writeFileSync: function (path, content) {
+        writeFileSync: function(path, content) {
             this.pkgJsonContent = content;
         },
     };
