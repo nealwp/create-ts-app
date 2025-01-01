@@ -42,11 +42,14 @@ export function getReadlineStub(retVals) {
  * @typedef {Object} FsStub
  * @property {string[]} createdFiles
  * @property {string[]} createdDirs
+ * @property {string} pkgJsonContent
  * @property {function(string): boolean} existsSync
  * @property {ReaddirFunc} readdirSync
  * @property {function(string): void} mkdirSync
  * @property {function(string): StatObj } statSync
  * @property {function(string, string): void} copyFileSync
+ * @property {function(string, 'utf8'): string} readFileSync
+ * @property {function(string, string, 'utf8'): void} writeFileSync
  */
 
 /**
@@ -58,6 +61,7 @@ export function getFsStub(retVal, retVal2 = []) {
     return {
         createdFiles: [],
         createdDirs: [],
+        pkgJsonContent: "{}",
         existsSync: () => retVal,
         readdirSync: function (path, opts) {
             if (opts.recursive) {
@@ -77,6 +81,12 @@ export function getFsStub(retVal, retVal2 = []) {
         },
         copyFileSync: function (src, dest) {
             this.createdFiles.push(dest);
+        },
+        readFileSync: function () {
+            return this.pkgJsonContent;
+        },
+        writeFileSync: function (path, content) {
+            this.pkgJsonContent = content;
         },
     };
 }
