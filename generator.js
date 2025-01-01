@@ -40,7 +40,7 @@ export async function generateProject(rl, fs) {
     const templatePath = await getTemplateSelection(fs, rl);
     createProjectDir(fs, targetPath);
     copyTemplateFiles(fs, templatePath, projectName);
-    setPackageName(fs, templatePath, projectName);
+    setPackageName(fs, targetPath, projectName);
     return projectName;
 }
 

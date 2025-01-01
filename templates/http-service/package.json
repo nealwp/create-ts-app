@@ -1,5 +1,5 @@
 {
-  "name": "typescript-express-app",
+  "name": "ts-http-service",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
