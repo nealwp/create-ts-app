@@ -1,40 +1,41 @@
-import { Router } from "express";
+import { Hono } from "hono";
 import service from "./service";
 
-const router = Router();
+const router = new Hono().basePath("/api/example");
 
-router.get("/health", (_, res) => {
-    return res.status(200).send();
+router.get("/health", (c) => {
+    return c.text("ok");
 });
 
-router.get("/", (_, res) => {
+router.get("/", (c) => {
     try {
         const examples = service.getExamples();
-        return res.status(200).json(examples);
+        return c.json(examples);
     } catch (error) {
         console.error(error);
-        return res.status(500).send();
+        return c.text("internal server error", 500);
     }
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (c) => {
     try {
-        const saved = service.saveExample(req.body);
-        return res.status(200).json(saved);
+        const body = await c.req.json();
+        const saved = service.saveExample(body);
+        return c.json(saved);
     } catch (error) {
         console.error(error);
-        return res.status(500).send();
+        return c.text("internal server error", 500);
     }
 });
 
-router.delete("/:id", (req, res) => {
-    const { id } = req.params;
+router.delete("/:id", (c) => {
     try {
+        const id = c.req.param("id");
         const deleted = service.deleteExample(+id);
-        return res.status(200).json(deleted);
+        return c.json(deleted);
     } catch (error) {
         console.error(error);
-        return res.status(500).send();
+        return c.text("internal server error", 500);
     }
 });
 

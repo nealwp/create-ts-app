@@ -1,13 +1,14 @@
-import express from "express";
-import { middleware } from "./middleware";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { compress } from "hono/compress";
+import { securityHeaders } from "./middleware";
 import router from "./router";
 
-const PORT = 3000;
-const server = express();
+export const app = new Hono();
 
-server.use(middleware);
-server.use("/api/example", router);
+app.use("*", cors());
+app.use("*", compress());
+app.use("*", securityHeaders);
+app.route("/", router);
 
-server.listen(PORT, () => {
-    console.log(`server started. listening on port ${PORT}...`);
-});
+export const port = 3000;

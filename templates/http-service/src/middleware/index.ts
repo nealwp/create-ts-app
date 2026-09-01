@@ -1,14 +1,9 @@
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
-import compression from "compression";
+import type { MiddlewareHandler } from "hono/types";
 
-const middleware = [
-    express.json(),
-    express.urlencoded({ extended: true }),
-    helmet(),
-    cors(),
-    compression(),
-];
-
-export { middleware };
+export const securityHeaders: MiddlewareHandler = async (c, next) => {
+    await next();
+    c.header("X-Content-Type-Options", "nosniff");
+    c.header("X-Frame-Options", "DENY");
+    c.header("X-XSS-Protection", "1; mode=block");
+    c.header("Referrer-Policy", "strict-origin-when-cross-origin");
+};

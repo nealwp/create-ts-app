@@ -14,7 +14,7 @@ You'll be prompted for a project name and a template. A new directory is created
 
 ### HTTP Service
 
-An Express-based REST API with TypeScript.
+A TypeScript-first REST API built with [Hono](https://hono.dev).
 
 ```console
 npx @nealwp/create-ts-app@latest
@@ -24,34 +24,35 @@ npx @nealwp/create-ts-app@latest
 
 **What's included:**
 
-- Express server with JSON, CORS, Helmet, and compression middleware
-- TypeScript with strict mode enabled
-- ESLint and Prettier configured
-- Unit tests via Node's built-in test runner and Supertest
-- Multi-stage Dockerfile for production builds
+-   Hono server with CORS, compression, and security headers middleware
+-   TypeScript with strict mode enabled
+-   ESLint and Prettier configured
+-   Unit tests via Node's built-in test runner (`app.request()` — no server needed)
+-   Multi-stage Dockerfile for production builds
 
 **Generated scripts:**
 
-| Script | Description |
-| --- | --- |
-| `npm run dev` | Start dev server with nodemon |
-| `npm run build` | Compile TypeScript to `dist/` |
-| `npm start` | Run compiled server |
-| `npm test` | Run tests |
-| `npm run check` | Type-check without emitting |
-| `npm run lint` | Lint with ESLint |
-| `npm run format` | Format with Prettier |
+| Script           | Description                   |
+| ---------------- | ----------------------------- |
+| `npm run dev`    | Start dev server with tsx     |
+| `npm run build`  | Compile TypeScript to `dist/` |
+| `npm start`      | Run compiled server           |
+| `npm test`       | Run tests                     |
+| `npm run check`  | Type-check without emitting   |
+| `npm run lint`   | Lint with ESLint              |
+| `npm run format` | Format with Prettier          |
 
 **Generated structure:**
 
 ```
 src/
-  app.ts              # Express entry point (port 3000)
-  router.ts           # Example CRUD routes under /api/example
-  service.ts          # Example service layer
-  middleware/index.ts  # Helmet, CORS, compression, JSON parsing
+  app.ts               # Hono app definition (exported for testing)
+  server.ts            # Node server bootstrap (port 3000)
+  router.ts            # Example CRUD routes under /api/example
+  service.ts           # Example service layer
+  middleware/index.ts  # Security headers middleware
 tests/
-  router.test.ts      # Supertest integration tests
+  router.test.ts       # Integration tests using app.request()
 ```
 
 ## Project Name Rules
