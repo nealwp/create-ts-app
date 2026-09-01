@@ -30,13 +30,14 @@ CI order: typecheck → lint → prettier check → test. Mirror this order when
 
 ## Style conventions
 
--   4-space indentation (Prettier `tabWidth: 4`)
--   JSON and YAML files excluded from Prettier (`.prettierignore`)
+-   4-space indentation (Prettier `tabWidth: 4`; template Biome `indentWidth: 4`)
+-   JSON and YAML files excluded from formatting — tool repo via `.prettierignore`, template via Biome `files.includes` (only `src/**/*.ts`, `tests/**/*.ts`)
 -   JSDoc type annotations on all JS functions in the tool — keep this pattern if adding code
 
 ## Gotchas
 
 -   `eslint-config-prettier` is in devDependencies but **not wired** into the ESLint config
+-   Toolchain split: the tool repo itself uses ESLint + Prettier; the generated template uses Biome (`biome.json`, scripts `lint`/`format`/`prettier` all call `npx biome`)
 -   Template uses Hono, not Express: tests call `app.request()` (no Supertest), serving uses `@hono/node-server`, security headers are a hand-rolled middleware
 -   The template has no `package-lock.json` in git — `npm ci` won't work in a fresh clone's template
 -   Project name validation: `^([A-Za-z\-_\d])+$` — no dots, slashes, or scoped names

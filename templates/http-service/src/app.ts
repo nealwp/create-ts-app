@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { cors } from "hono/cors";
 import { compress } from "hono/compress";
+import { cors } from "hono/cors";
 import { securityHeaders } from "./middleware/index.js";
 import router from "./router.js";
 

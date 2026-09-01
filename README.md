@@ -26,21 +26,21 @@ npx @nealwp/create-ts-app@latest
 
 -   Hono server with CORS, compression, and security headers middleware
 -   TypeScript with strict mode enabled
--   ESLint and Prettier configured
+-   Linted and formatted with Biome
 -   Unit tests via Node's built-in test runner (`app.request()` — no server needed)
 -   Multi-stage Dockerfile for production builds
 
 **Generated scripts:**
 
-| Script           | Description                   |
-| ---------------- | ----------------------------- |
-| `npm run dev`    | Start dev server with tsx     |
-| `npm run build`  | Compile TypeScript to `dist/` |
-| `npm start`      | Run compiled server           |
-| `npm test`       | Run tests                     |
-| `npm run check`  | Type-check without emitting   |
-| `npm run lint`   | Lint with ESLint              |
-| `npm run format` | Format with Prettier          |
+| Script           | Description                          |
+| ---------------- | ------------------------------------ |
+| `npm run dev`    | Start dev server with tsx            |
+| `npm run build`  | Compile TypeScript to `dist/`        |
+| `npm start`      | Run compiled server                  |
+| `npm test`       | Run tests                            |
+| `npm run check`  | Type-check without emitting          |
+| `npm run lint`   | Lint and check formatting (Biome)    |
+| `npm run format` | Auto-fix lint and formatting (Biome) |
 
 **Generated structure:**
 
