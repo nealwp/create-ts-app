@@ -26,7 +26,7 @@
   "author": "nealwp",
   "license": "ISC",
   "engines": {
-    "node": ">=14.16"
+    "node": ">=22"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
