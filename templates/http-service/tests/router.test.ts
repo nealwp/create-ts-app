@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert";
-import { app } from "../src/app";
+import { app } from "../src/app.js";
 
 describe("GET /api/example/health", () => {
     it("should return 200 status", async () => {

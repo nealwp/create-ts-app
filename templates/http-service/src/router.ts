@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import service from "./service";
+import service from "./service.js";
 
 const router = new Hono().basePath("/api/example");
 

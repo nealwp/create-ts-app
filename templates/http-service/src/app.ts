@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { compress } from "hono/compress";
-import { securityHeaders } from "./middleware";
-import router from "./router";
+import { securityHeaders } from "./middleware/index.js";
+import router from "./router.js";
 
 export const app = new Hono();
 
