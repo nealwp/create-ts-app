@@ -1,34 +1,46 @@
-import supertest from "supertest";
+import assert from "node:assert";
 import { describe, it } from "node:test";
-import express from "express";
-import router from "../src/router";
-
-const server = express();
-server.use(express.json());
-server.use(express.urlencoded({ extended: true }));
-server.use("/api/example", router);
-const request = supertest(server);
+import { app } from "../src/app.js";
 
 describe("GET /api/example/health", () => {
     it("should return 200 status", async () => {
-        await request.get(`/api/example/health`).expect(200);
+        const res = await app.request("/api/example/health");
+        assert.strictEqual(res.status, 200);
     });
 });
 
 describe("GET /api/example", () => {
     it("should return 200 status", async () => {
-        await request.get(`/api/example`).expect(200);
+        const res = await app.request("/api/example");
+        assert.strictEqual(res.status, 200);
     });
 });
 
 describe("POST /api/example", () => {
     it("should return 200 status", async () => {
-        await request.post(`/api/example`).expect(200);
+        const res = await app.request("/api/example", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ foo: "1", bar: "2", baz: "3" }),
+        });
+        assert.strictEqual(res.status, 200);
+    });
+
+    it("should return 400 for an invalid body", async () => {
+        const res = await app.request("/api/example", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: "test" }),
+        });
+        assert.strictEqual(res.status, 400);
     });
 });
 
 describe("DELETE /api/example/:id", () => {
     it("should return 200 status", async () => {
-        await request.delete(`/api/example/1234`).expect(200);
+        const res = await app.request("/api/example/1234", {
+            method: "DELETE",
+        });
+        assert.strictEqual(res.status, 200);
     });
 });
