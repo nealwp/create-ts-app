@@ -1,5 +1,6 @@
+import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import service from "./service.js";
+import service, { exampleSchema } from "./service.js";
 
 const router = new Hono().basePath("/api/example");
 
@@ -17,10 +18,10 @@ router.get("/", (c) => {
     }
 });
 
-router.post("/", async (c) => {
+router.post("/", zValidator("json", exampleSchema), (c) => {
     try {
-        const body = await c.req.json();
-        const saved = service.saveExample(body);
+        const example = c.req.valid("json");
+        const saved = service.saveExample(example);
         return c.json(saved);
     } catch (error) {
         console.error(error);

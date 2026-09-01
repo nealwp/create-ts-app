@@ -38,7 +38,7 @@ CI order: typecheck → lint → prettier check → test. Mirror this order when
 
 -   `eslint-config-prettier` is in devDependencies but **not wired** into the ESLint config
 -   Toolchain split: the tool repo itself uses ESLint + Prettier; the generated template uses Biome (`biome.json`, scripts `lint`/`format`/`prettier` all call `npx biome`)
--   Template uses Hono, not Express: tests call `app.request()` (no Supertest), serving uses `@hono/node-server`, security headers are a hand-rolled middleware
+-   Template uses Hono, not Express: tests call `app.request()` (no Supertest), serving uses `@hono/node-server`, security headers are a hand-rolled middleware, request bodies are validated with Zod via `@hono/zod-validator`
 -   The template has no `package-lock.json` in git — `npm ci` won't work in a fresh clone's template
 -   Project name validation: `^([A-Za-z\-_\d])+$` — no dots, slashes, or scoped names
 -   Template files are copied byte-for-byte (no templating engine) — edit templates in place under `templates/`

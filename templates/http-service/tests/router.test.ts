@@ -21,9 +21,18 @@ describe("POST /api/example", () => {
         const res = await app.request("/api/example", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: "test" }),
+            body: JSON.stringify({ foo: "1", bar: "2", baz: "3" }),
         });
         assert.strictEqual(res.status, 200);
+    });
+
+    it("should return 400 for an invalid body", async () => {
+        const res = await app.request("/api/example", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: "test" }),
+        });
+        assert.strictEqual(res.status, 400);
     });
 });
 

@@ -25,6 +25,7 @@ npx @nealwp/create-ts-app@latest
 **What's included:**
 
 -   Hono server with CORS, compression, and security headers middleware
+-   Zod request validation via `@hono/zod-validator`
 -   TypeScript with strict mode enabled
 -   Linted and formatted with Biome
 -   Unit tests via Node's built-in test runner (`app.request()` — no server needed)
